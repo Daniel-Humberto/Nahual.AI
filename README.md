@@ -1,4 +1,7 @@
-# Laboratorio de Investigación y Desarrollo de Agentes de IA V6 (Moonshot Edition)
+# 🐺 Nahual.AI: The Shape-Shifting Interface
+
+> **Proyecto desarrollado para el Generative UI Global Hackathon**  
+> *Transformando la interacción humano-IA de burbujas de texto estáticas a interfaces vivas que cambian de forma.*
 
 ---
 
@@ -15,133 +18,97 @@
 
 ---
 
-## Visión Ejecutiva
+## 🎭 El Concepto: ¿Por qué Nahual?
 
-**Agentic Lab V6 "Moonshot"** es la evolución definitiva hacia interfaces generativas y orquestación agentica de alto rendimiento. Esta versión marca la transición de componentes UI estáticos hacia una arquitectura **100% Server-Driven UI (SDUI)**, permitiendo que los agentes de IA no solo generen respuestas, sino que construyan interfaces complejas, anidadas y funcionales en tiempo real a través de un pipeline de streaming SSE directo.
+En la mitología mesoamericana, el **Nahual** es un ser con la capacidad de transformarse, de cambiar su forma para adaptarse a su entorno y propósito. 
 
-### Arquitectura Moonshot
+**Nahual.AI** aplica esta filosofía a la informática moderna. Creemos que la era de las interfaces de usuario estáticas ha terminado. En lugar de forzar al usuario a navegar por menús rígidos o leer párrafos interminables de texto, nuestra arquitectura **"Shapeshifter"** construye la interfaz perfecta en tiempo real, basándose exclusivamente en la intención del usuario y el contexto de los datos.
 
-El sistema opera sobre una infraestructura de **21 servicios Docker** coordinados en **4 redes lógicas**, optimizados para baja latencia (<300ms TTFT en routing local) y soberanía total de datos.
+---
 
-| Red | Capa | Servicios Principales |
-|---|---|---|
-| `frontend-net` | Interfaces Generativas | Next.js 16 (SDUI), Open WebUI |
-| `backend-net` | Orquestación & SDUI | FastAPI, Redis (Checkpointing), PostgreSQL, Neo4j, n8n |
-| `ai-net` | Inferencia & RAG | Ollama (Gemma 3/2), Qdrant (Vectorial), Neo4j (Grafos), Gemini Flash |
-| `observability-net` | MLOps & Telemetría | Prometheus, Grafana, Langfuse, NVIDIA DCGM |
+## 🚀 La Propuesta: Más allá del Chat
 
-### Pipeline SDUI Dinámico (Capa 4)
+La mayoría de los agentes de IA hoy viven atrapados en burbujas de chat. **Nahual.AI** rompe esa barrera mediante una arquitectura **100% Server-Driven UI (SDUI)** de alto rendimiento.
 
-A diferencia de versiones anteriores, V6 implementa un sistema de renderizado recursivo:
+### Pilares Tecnológicos:
+1.  **Orquestación Agentica (LangGraph)**: Un grafo de decisión complejo que separa la intención (Routing), la recuperación de datos (GraphRAG) y la síntesis visual.
+2.  **Protocolo MCP (Model Context Protocol)**: Integración dinámica de herramientas. El sistema descubre y ejecuta herramientas en tiempo real, inyectando los resultados directamente en la fase de generación de UI.
+3.  **Motor de Síntesis Visual (Gemini 2.0 Flash)**: Utilizamos el razonamiento estructural de Gemini para transformar datos crudos en un AST (Abstract Syntax Tree) de componentes React listos para ser renderizados.
+4.  **Inferencia Híbrida**: Router local con **Ollama (Gemma 2b)** para latencia ultra-baja (<300ms) y modelos de frontera para el razonamiento complejo.
 
+---
+
+## 🛠 Arquitectura del Sistema
+
+El flujo de **Nahual.AI** no es una simple respuesta de texto, es una metamorfosis:
+
+```mermaid
+graph TD
+    A[Usuario: Intent] --> B{Router: Ollama}
+    B -->|Búsqueda| C[Knowledge Layers: Qdrant/Neo4j]
+    B -->|Acción| D[MCP Tool Execution]
+    C & D --> E[Super-Contexto]
+    E --> F[Gemini 2.0 Flash: UI Architect]
+    F -->|AST JSON| G[Next.js 16: Recursive Renderer]
+    G --> H[Interfaz Generativa: Form/Chart/Metric]
 ```
-User Query → [Router Agent] → [GraphRAG] → [Tool Exec] → [SDUI Generator] → [Dynamic UI]
-     ↓              ↓              ↓             ↓                ↓                ↓
-  Intención      Retrieval      Acciones      Esquema AST      Streaming SSE    Renderizado
-  (Ollama)       (Multi-DB)     (Mutación)    (Gemini Flash)   (Recursivo)      (React 19)
-```
+
+### Stack de "Vanguardia":
+*   **Frontend**: Next.js 16 (Canary), React 19, Tailwind 4, Framer Motion.
+*   **Backend**: FastAPI, Python 3.12, LangGraph.
+*   **Herramientas**: MCP (Model Context Protocol) via HTTP Streamable.
+*   **Bases de Datos**: PostgreSQL (Relacional), Redis (State), Qdrant (Vectorial), Neo4j (Grafos).
+*   **Observabilidad**: Langfuse (LLM Tracing), Grafana + Prometheus (Infra), NVIDIA DCGM (GPU).
 
 ---
 
-## Stack Tecnológico de Nueva Generación
+## ✨ Características Principales
 
-### Frontend & SDUI (Server-Driven UI)
-- **Next.js 16 + React 19**: Uso intensivo de Server Actions y streaming SSE.
-- **Recursive Dynamic Renderer**: Capacidad de renderizar componentes anidados (Container, Card, Row, Column, Text, Metric, etc.) basados en un AST generado por LLM.
-- **Tailwind 4 + Framer Motion**: Micro-animaciones para una experiencia premium y fluida.
-- **Direct SSE Pipeline**: Eliminación de intermediarios para reducir la latencia de actualización de UI.
-
-### Backend AI Core
-- **FastAPI + Python 3.12**: Arquitectura limpia con soporte nativo para streaming asíncrono.
-- **LangGraph Moonshot**: Orquestación de 4 capas con **Redis Checkpointing** para persistencia de estado y **Semantic Caching**.
-- **Recursive Pydantic Contracts**: Esquemas `UIElement` estrictos que garantizan la integridad de la interfaz generada.
-
-### Capa de Inferencia & Modelos
-- **Ollama Local (NVIDIA GPU)**: 
-  - `gemma3:4b`: Router principal de baja latencia.
-  - `gemma2:2b`: Clasificador de respaldo y tareas de extracción.
-- **Google Gemini 2.0 Flash**: Motor de generación de UI (SDUI) por su alta velocidad y capacidad de razonamiento estructural.
-
-### Bases de Datos Multimodales
-- **PostgreSQL 15**: Persistencia relacional, sesiones y auditoría.
-- **Redis (Alpine)**: Checkpointing de LangGraph, caché semántico y estado efímero.
-- **Qdrant**: Búsqueda vectorial para RAG semántico.
-- **Neo4j 5.12**: Grafos de conocimiento para relaciones complejas y razonamiento GraphRAG.
+*   **⚡ Latencia "Zero-Draft"**: Pipeline de streaming SSE que renderiza componentes mientras la IA aún está razonando.
+*   **🧩 Catálogo de Componentes Recursivos**: Capacidad de anidar Card, Charts, Forms y Metrics dinámicamente.
+*   **🔍 GraphRAG Nativo**: No solo buscamos texto; entendemos las relaciones entre entidades gracias a Neo4j.
+*   **🛡 Guardrails de Diseño**: Los componentes se generan bajo un contrato estricto de Pydantic, garantizando que la UI siempre sea funcional y visualmente premium.
+*   **🌐 Ecosistema MCP**: Conexión plug-and-play con cualquier herramienta que hable el protocolo MCP (Finanzas, Inventarios, Logs, etc).
 
 ---
 
-## Catálogo de Servicios y Endpoints V6
+## 📦 Instalación y Despliegue
 
-### Interfaces de Usuario
+### Requisitos
+*   Docker & Docker Compose.
+*   NVIDIA GPU (para Ollama local).
+*   `GEMINI_API_KEY` configurada en el `.env`.
 
-| Servicio | URL Local | Propósito | Características |
-|---|---|---|---|
-| **Portal SDUI** | <http://localhost:3000> | Chat Generativo + SDUI | Renderizado recursivo, streaming en tiempo real |
-| **Open WebUI** | <http://localhost:8080> | Chat directo con Ollama | Gestión de modelos local y multimodal |
-| **Grafana MLOps** | <http://localhost:3001> | Observabilidad Total | Dashboards de GPU, Ollama, DBs y Contenedores |
-| **n8n Automation** | <http://localhost:5678> | Workflows Visuales | Automatización de tareas backend y externas |
-| **Langfuse** | <http://localhost:3031> | Observabilidad LLM | Trazas, costos, latencia y evaluación de prompts |
-
-### APIs y Protocolos Técnicos
-
-| Servicio | Endpoint | Funcionalidad | Protocolo |
-|---|---|---|---|
-| **SDUI API** | `POST /api/v1/ui` | Pipeline SDUI completo | SSE Streaming |
-| **Agent API** | `POST /api/v1/agent` | Pipeline conversacional | HTTP/REST + SSE |
-| **Health Check** | `GET /health` | Estado del sistema V6 | HTTP |
-| **Ollama API** | <http://localhost:11434> | Inferencia local | HTTP/REST |
-| **Neo4j Bolt** | `bolt://localhost:7687` | Conector de grafos | Binario (Bolt) |
-
----
-
-## Observabilidad MLOps Completa
-
-V6 integra un stack de monitoreo de 21 servicios que permite supervisar cada aspecto del laboratorio:
-
-- **Métricas de GPU**: Utilización, temperatura y memoria VRAM vía `dcgm-exporter`.
-- **Métricas de Ollama**: Tokens/segundo, latencia TTFT y throughput por modelo.
-- **Métricas de Base de Datos**: Estado de Postgres, Redis, Qdrant y Neo4j en tiempo real.
-- **Trazas de Langfuse**: Trazabilidad completa de cada paso del grafo LangGraph, incluyendo costos de Gemini y latencia de Ollama.
-
----
-
-## Operación y Despliegue
-
-### Requisitos Mínimos
-- **Ubuntu 24.04 LTS** (Altamente recomendado).
-- **NVIDIA GPU** con 8GB+ VRAM (NVIDIA Container Toolkit instalado).
-- **Docker + Docker Compose v2.20+**.
-- **16GB RAM** de sistema.
-
-### Instalación Rápida
+### Quick Start
 ```bash
-# 1. Configurar variables de entorno
-cp .env.example .env # Asegúrate de añadir tu GEMINI_API_KEY
+# 1. Clonar y configurar
+git clone https://github.com/nahual-ai/generative-ui-hackathon
+cp .env.example .env
 
-# 2. Iniciar infraestructura
+# 2. Levantar la infraestructura (21 servicios)
 make up
 
-# 3. Preparar modelos locales
+# 3. Descargar modelos locales
 make update-models
 ```
 
-### Gestión con Makefile
-- `make up`: Levanta los 21 servicios.
-- `make build`: Reconstruye las imágenes de backend y frontend.
-- `make logs`: Visualiza logs en tiempo real.
-- `make status`: Verifica el estado de salud de todos los contenedores.
+Accede al portal en: `http://localhost:3000`
 
 ---
 
-## Estado Actual & Roadmap Moonshot
+## 👥 El Equipo: Nahual.AI
 
-| Hito | Estado | Detalle |
-| :--- | :--- | :--- |
-| **SDUI Engine** | ✅ Operativo | Motor de renderizado recursivo basado en Gemini Flash |
-| **Redis Checkpointing** | ✅ Implementado | Persistencia de estado en LangGraph entre turnos |
-| **MLOps Stack** | ✅ Completo | 21 servicios con dashboards preconfigurados |
-| **Direct SSE Streaming** | ✅ Funcional | Pipeline sin intermediarios para latencia mínima |
-| **GraphRAG real** | 🔶 En progreso | Integración de embeddings reales en Qdrant y Neo4j |
-| **MCP Implementation** | 🔶 En progreso | Servidor MCP funcional para integración de herramientas |
+Somos un equipo apasionado por la intersección entre el diseño generativo y la ingeniería de agentes.
 
-**Desarrollado para el Laboratorio de IA de Vanguardia.**
+*   **Líder de Arquitectura**: [Nombre]
+*   **Frontend & UX**: [Nombre]
+*   **AI Ops & Backend**: [Nombre]
+
+---
+
+## 📜 Licencia y Hackathon
+
+Este proyecto fue creado exclusivamente para el **Generative UI Global Hackathon**. 
+© 2026 Equipo Nahual.AI.
+
+> *"La interfaz no es algo que navegas, es algo que te escucha y se transforma para ti."*
