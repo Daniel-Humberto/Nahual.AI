@@ -2,6 +2,19 @@
 
 ---
 
+
+## Interfaz de Chat
+
+<p align="center">
+  <img src="Imagenes/1.png"
+       alt="Interfaz de Chat"
+       width="900"
+       style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0px 8px 24px rgba(37, 99, 235, 0.18);">
+</p>
+
+
+---
+
 ## Visión Ejecutiva
 
 **Agentic Lab V6 "Moonshot"** es la evolución definitiva hacia interfaces generativas y orquestación agentica de alto rendimiento. Esta versión marca la transición de componentes UI estáticos hacia una arquitectura **100% Server-Driven UI (SDUI)**, permitiendo que los agentes de IA no solo generen respuestas, sino que construyan interfaces complejas, anidadas y funcionales en tiempo real a través de un pipeline de streaming SSE directo.
