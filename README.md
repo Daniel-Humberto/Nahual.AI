@@ -16,6 +16,34 @@
        style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0px 8px 24px rgba(37, 99, 235, 0.18);">
 </p>
 
+<p align="center">
+  <img src="Imagenes/2.png"
+       alt="Interfaz de Chat"
+       width="900"
+       style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0px 8px 24px rgba(37, 99, 235, 0.18);">
+</p>
+
+<p align="center">
+  <img src="Imagenes/3.png"
+       alt="Interfaz de Chat"
+       width="900"
+       style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0px 8px 24px rgba(37, 99, 235, 0.18);">
+</p>
+
+<p align="center">
+  <img src="Imagenes/4.png"
+       alt="Interfaz de Chat"
+       width="900"
+       style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0px 8px 24px rgba(37, 99, 235, 0.18);">
+</p>
+
+<p align="center">
+  <img src="Imagenes/5.png"
+       alt="Interfaz de Chat"
+       width="900"
+       style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0px 8px 24px rgba(37, 99, 235, 0.18);">
+</p>
+
 
 ---
 
