@@ -125,29 +125,54 @@ Para lograr una experiencia fluida y profesional, hemos diseñado nuestra arquit
 
 ---
 
-## 📦 Instalación y Despliegue
+
+## Flujo Operativo Local
+
 
 ### Requisitos
-*   Docker & Docker Compose.
-*   NVIDIA GPU (para Ollama local).
-*   `GEMINI_API_KEY` configurada en el `.env`.
 
-### Quick Start
+- Linux recomendado: Ubuntu 24.04 LTS.
+- Docker y Docker Compose.
+- GPU NVIDIA compatible si se usará aceleración local con Ollama/DCGM.
+- NVIDIA Container Toolkit para exponer GPU a contenedores.
+- 16 GB RAM como base recomendada; 8 GB o más de VRAM para modelos 7B+.
+
+
+### Primer arranque
+
 ```bash
-# 1. Clonar y configurar
-git clone https://github.com/nahual-ai/generative-ui-hackathon
 cp .env.example .env
-
-# 2. Levantar la infraestructura (21 servicios)
+make build
 make up
-
-# 3. Descargar modelos locales
 make update-models
 ```
 
-Accede al portal en: `http://localhost:3000`
+`make update-models` descarga en Ollama:
+
+- `gemma3:4b`
+- `gemma2:2b` (Google)
+
+
+### Script de operación
+
+El script `agentic_ops.sh` automatiza instalación base, inicialización del `.env`
+y control del laboratorio:
+
+```bash
+./agentic_ops.sh install
+./agentic_ops.sh start
+./agentic_ops.sh status
+./agentic_ops.sh restart
+./agentic_ops.sh stop
+```
+
+`install` puede instalar Docker y NVIDIA Container Toolkit en sistemas compatibles.
+Revisa el script antes de ejecutarlo en estaciones compartidas o ambientes
+corporativos.
+
 
 ---
+
 
 ## Referencia Rápida
 
