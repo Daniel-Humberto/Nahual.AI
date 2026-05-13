@@ -176,9 +176,9 @@ Accede al portal en: `http://localhost:3000`
 
 Somos un equipo apasionado por la intersección entre el diseño generativo y la ingeniería de agentes.
 
-*   **Líder de Arquitectura**: [Nombre]
-*   **Frontend & UX**: [Nombre]
-*   **AI Ops & Backend**: [Nombre]
+*   **Líder de Arquitectura**: Daniel Humberto
+*   **Frontend & UX**: Alan Manuel Medina Solis
+*   **Data Scientist**: José Antonio Ramírez Moguel 
 
 ---
 
