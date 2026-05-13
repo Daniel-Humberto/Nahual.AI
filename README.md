@@ -156,7 +156,6 @@ make update-models
 ### Script de operación
 
 El script `agentic_ops.sh` automatiza instalación base, inicialización del `.env`
-y control del laboratorio:
 
 ```bash
 ./agentic_ops.sh install
