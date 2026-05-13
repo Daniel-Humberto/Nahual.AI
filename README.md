@@ -166,8 +166,6 @@ El script `agentic_ops.sh` automatiza instalación base, inicialización del `.e
 ```
 
 `install` puede instalar Docker y NVIDIA Container Toolkit en sistemas compatibles.
-Revisa el script antes de ejecutarlo en estaciones compartidas o ambientes
-corporativos.
 
 
 ---
