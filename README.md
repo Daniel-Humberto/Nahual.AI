@@ -1,9 +1,11 @@
 # 🐺 Nahual.AI — The Shape-Shifting Interface
 
+
 <p align="center">
   <strong>Generative UI Global Hackathon 2026 · Agentic Interfaces</strong><br/>
   <em>Presented by AI Tinkerers · Google DeepMind · CopilotKit</em>
 </p>
+
 
 <p align="center">
   <img src="Imagenes/1.png"
@@ -12,12 +14,15 @@
        style="max-width:100%; border-radius:12px; box-shadow:0 8px 24px rgba(37,99,235,0.18);">
 </p>
 
+
 <p align="center">
     🐺 <em>In the mythology of our ancestors, the Nahual transforms in the blink of an eye.<br/>
   In ours, so does the interface.</em>
 </p>
 
+
 ---
+
 
 ## ✦ The Origin: Why Nahual?
 
@@ -31,7 +36,9 @@ The vast majority of AI agents built today are, at their core, stateless text ma
 
 > *"No es un chatbot más, ni una interfaz que navegas — es un sistema que evoluciona y se adapta a ti."*
 
+
 ---
+
 
 ## 🎯 Executive Summary
 
@@ -44,11 +51,14 @@ The vast majority of AI agents built today are, at their core, stateless text ma
 
 This is not a demo. This is a production-aligned system built from infrastructure upward, with AIOps principles, IaC, clean architecture, and SOLID design guiding every layer.
 
+
 ---
+
 
 ## 🏆 Hackathon Track Alignment
 
 Nahual.AI was architected to address two tracks simultaneously, as they represent two sides of the same paradigm shift:
+
 
 ### Track 1 · Kill the Dashboard
 
@@ -58,6 +68,7 @@ Traditional BI dashboards are a form of UI debt. They are designed by analysts w
 
 **Nahual.AI inverts this.** The user expresses intent in natural language. The pipeline classifies that intent, retrieves grounded data across three knowledge layers (PostgreSQL, Qdrant, Neo4j), and instructs Gemini 2.0 Flash to synthesize a component AST — a `BarChart`, a `DataTable`, a `StatCard` cluster — that is rendered live in the browser. No predefined page exists. The interface is the answer.
 
+
 ### Track 3 · Agent App Store
 
 > *The challenge: build multi-tool agentic experiences with MCP that feel native and coherent.*
@@ -66,7 +77,9 @@ A single data source is rarely enough for real enterprise queries. "Which orders
 
 **Nahual.AI's `node_mcp_discovery` node** enumerates all available tools from the MCP server at runtime, before routing. The router then selects which tools are needed based on intent, `node_tool_execution` invokes them asynchronously, and the results are injected into a unified super-context. The UI generator then composes a coherent multi-source interface from that context. The user never sees the seams.
 
+
 ---
+
 
 ## 🚀 The Core Proposition: Beyond the Chat Bubble
 
@@ -83,11 +96,14 @@ A chatbot would return a paragraph. Maybe a markdown table. The user would need 
 
 **The density of information and the immediacy of action are impossible to replicate in text.** This is the core argument for Generative UI, and it is the problem this project was built to solve.
 
+
 ---
+
 
 ## 🏗️ System Architecture
 
 The architecture was designed around three non-negotiable constraints: **latency**, **accuracy**, and **composability**. Every architectural decision is a response to one or more of these constraints.
+
 
 ### Low-Level Pipeline Flow
 
@@ -101,6 +117,7 @@ graph TD
     F -->|Typed AST JSON| G[Next.js 16 Recursive Renderer]
     G --> H[✨ Interactive Interface]
 ```
+
 
 ### High-Level Agent Pipeline (5 Nodes)
 
@@ -132,11 +149,13 @@ flowchart TD
     U --> A --> N1 --> N2 --> N3 --> N4 --> N5 --> V --> NX --> UI
 ```
 
+
 ### Why This Pipeline Design?
 
 **The 5-node separation is intentional.** Monolithic agent architectures that combine routing, retrieval, tool execution, and generation in a single LLM pass suffer from two compounding problems: unpredictable latency (any step's failure cascades) and hallucination amplification (the model tries to do too many things in one context window). LangGraph's `StateGraph` forces explicit node transitions, enabling targeted error handling, partial retries, and per-node observability via Langfuse.
 
 **The hybrid inference model is the latency lever.** Running intent routing on a local Gemma 2b instance through Ollama eliminates the ~400–900ms cold-start penalty of a cloud API call for the most frequent operation in the pipeline. The cloud budget (Gemini 2.0 Flash) is spent exclusively where it matters: generating complex, structured component ASTs that require strong world knowledge and instruction following. This split — local for classification, cloud for synthesis — is the primary reason E2E latency remains under 2.5 seconds.
+
 
 ### SSE Streaming Protocol
 
@@ -153,11 +172,14 @@ The frontend receives progressive updates from each node, allowing the UI to ref
 "pipeline_end"         → Total E2E latency reported
 ```
 
+
 ---
+
 
 ## 🧠 Memory Architecture: Four Layers, Zero Hallucinations
 
 In a Generative UI system, the data layer is not a database — it is a semantic memory fabric. Getting this wrong means slow interfaces, incoherent components, and hallucinated props. The architecture uses four distinct memory layers, each optimized for a specific type of recall.
+
 
 ### Layer 1 · VectorRAG (Qdrant) — Component Knowledge
 
@@ -165,17 +187,20 @@ In a Generative UI system, the data layer is not a database — it is a semantic
 
 Every React component in the design system — its props contract, valid values, Tailwind class constraints, and composition rules — is vectorized and stored in Qdrant. When the router detects a visualization intent, the system performs a sub-100ms semantic search and injects the exact JSON Schema for the matched component (e.g., `BarChart`) into Gemini's context. The model knows precisely which props exist and which do not. **This is why Nahual.AI generates zero malformed components.**
 
+
 ### Layer 2 · GraphRAG (Neo4j) — Relational Intelligence
 
 **Purpose:** Answer questions about relationships between entities that semantic search cannot resolve.
 
 Vector search excels at finding similar content. It fails at following relationships. The query *"Which manager approved the order that failed yesterday?"* requires graph traversal: `(Order_1234) <-[APPROVED_BY]- (User_X)` and `(Order_1234) -[STATUS]-> (Failed)`. Neo4j with the APOC plugin handles this in milliseconds. Additionally, composition rules for the UI itself (e.g., a `Dashboard` may contain `StatCard` nodes but not `ApprovalForm` directly) are encoded as graph constraints, preventing invalid component nesting.
 
+
 ### Layer 3 · Redis — Pipeline State & Session Cache
 
 **Purpose:** Store ephemeral state across node transitions with sub-millisecond access.
 
 During a single pipeline execution, intermediate results (partial API responses, session flags, node output payloads) must be accessible across nodes without database round-trips. Redis handles this at memory speed. Its role in the latency budget is invisible but essential: every millisecond saved here compounds across thousands of concurrent sessions.
+
 
 ### Layer 4 · PostgreSQL + LangGraph Checkpointer — Agent Memory
 
@@ -196,9 +221,12 @@ LangGraph's checkpointing system serializes the full graph state after every int
 └───────────────┴────────────────┴────────────────────────┘
 ```
 
+
 ---
 
+
 ## 🛠️ Technical Stack
+
 
 ### Backend
 
@@ -215,6 +243,7 @@ LangGraph's checkpointing system serializes the full graph state after every int
 | **Observability** | Langfuse | Full LLM trace, token usage, reasoning latency per node |
 | **API Framework** | FastAPI + sse-starlette | Async SSE streaming; OpenAPI docs auto-generated |
 
+
 ### Frontend
 
 | Component | Technology | Rationale |
@@ -224,6 +253,7 @@ LangGraph's checkpointing system serializes the full graph state after every int
 | **Styling** | Tailwind CSS 4 | Design token alignment with component contracts |
 | **Type Safety** | TypeScript 5 | End-to-end contract enforcement from Pydantic → React props |
 | **Icons** | Lucide React | Consistent, accessible SVG icon system |
+
 
 ### Infrastructure
 
@@ -264,9 +294,12 @@ LangGraph's checkpointing system serializes the full graph state after every int
   └── neo4j-browser    Graph Queries    :7474
 ```
 
+
 ---
 
+
 ## 🎭 The Five Pillars
+
 
 ### ① Dynamic MCP Tool Discovery
 
@@ -289,6 +322,7 @@ async def _mcp_list_tools_async():
 # graph_neo4j          → Relationship traversal
 ```
 
+
 ### ② Hybrid Inference — The Latency Architecture
 
 ```
@@ -302,6 +336,7 @@ async def _mcp_list_tools_async():
 │  TOTAL E2E (SSE)                         <2.5s    Full render  │
 └────────────────────────────────────────────────────────────────┘
 ```
+
 
 ### ③ Multi-Layer Data Grounding
 
@@ -325,6 +360,7 @@ GET /api/flights?from=MAD&to=BCN&date=today
 → Live flight status injected directly into UI context
 ```
 
+
 ### ④ Type-Safe Component Contracts
 
 Every interface generated by the system passes through a Pydantic validation layer before reaching the renderer. This is the architectural guarantee against hallucinated props.
@@ -344,6 +380,7 @@ class VisualUIOutput(BaseModel):
 # automatic safe fallback UI rendered, pipeline continues
 ```
 
+
 ### ⑤ Production Observability
 
 Full end-to-end telemetry across every system layer:
@@ -355,7 +392,9 @@ Grafana   → Real-time dashboards for all 16 services
 DCGM      → NVIDIA GPU utilization (Ollama inference load)
 ```
 
+
 ---
+
 
 ## 📊 Generative Component Catalog
 
@@ -373,7 +412,9 @@ DCGM      → NVIDIA GPU utilization (Ollama inference load)
 | `map_view` | Geospatial data | Warehouse locations with inventory heatmap |
 | `traffic_sources` | Analytics | Conversion by acquisition channel + trends |
 
+
 ---
+
 
 ## 🚀 Requirements
 
@@ -386,7 +427,9 @@ Docker Compose 2.20+
 NVIDIA GPU + NVIDIA Container Toolkit (optional but recommended)
 ```
 
+
 ---
+
 
 ## 📊 Screenshots
 
@@ -406,7 +449,9 @@ NVIDIA GPU + NVIDIA Container Toolkit (optional but recommended)
   <img src="Imagenes/5.png" width="900" style="border-radius:12px; box-shadow:0 8px 24px rgba(37,99,235,0.18);">
 </p>
 
+
 ---
+
 
 ## 📊 DashBoards
 
@@ -420,6 +465,7 @@ NVIDIA GPU + NVIDIA Container Toolkit (optional but recommended)
 
 ---
 
+
 ## 🌐 Service Map
 
 | Service | URL | Purpose |
@@ -431,9 +477,12 @@ NVIDIA GPU + NVIDIA Container Toolkit (optional but recommended)
 | **Neo4j Browser** | localhost:7474 | Graph DB explorer |
 | **PgAdmin** | localhost:5050 | PostgreSQL management |
 
+
 ---
 
+
 ## 📝 API Reference
+
 
 ### `POST /api/v1/agent`
 
@@ -444,6 +493,7 @@ NVIDIA GPU + NVIDIA Container Toolkit (optional but recommended)
   "session_id": "user-session-123"
 }
 ```
+
 
 **Response (Server-Sent Events stream):**
 ```
@@ -478,7 +528,9 @@ event: pipeline_end
 data: {"status": "completed", "total_latency_ms": 1923}
 ```
 
+
 ---
+
 
 ## ⚡ Performance Metrics
 
@@ -490,7 +542,9 @@ data: {"status": "completed", "total_latency_ms": 1923}
 | UI Generation | 200–800ms | Gemini 2.0 Flash (JSON mode) |
 | **Total End-to-End** | **< 2.5s** | SSE progressive rendering |
 
+
 ---
+
 
 ## 👥 Team
 
@@ -500,7 +554,9 @@ data: {"status": "completed", "total_latency_ms": 1923}
 | **Frontend & UX** | Alan Manuel Medina Solis |
 | **Data Science** | José Antonio Ramírez Moguel |
 
+
 ---
+
 
 ## 🔗 Ecosystem & Sponsors
 
@@ -513,13 +569,50 @@ data: {"status": "completed", "total_latency_ms": 1923}
 | **Manufact** | MCP Server · mcp-use SDK | [manufact.com](https://manufact.com) |
 | **Daytona** | Ephemeral Execution Environments | [daytona.io](https://daytona.io) |
 
+
 ---
+
+
+## 🧱 Built On Prior Infrastructure
+
+Nahual.AI was constructed **on top of a pre-existing self-hosted AI lab** — [**AgentAI-Lab**](https://github.com/Daniel-Humberto/AgentAI-Lab) — a production-grade, 18-container local AI research platform developed in the months prior to the hackathon.
+
+This is explicitly permitted by the competition rules, which allowed participants to bring existing infrastructure as a foundation.
+
+
+### What AgentAI-Lab Provided (Pre-Hackathon)
+
+The base platform contributed the containerized infrastructure: Docker Compose networks, database provisioning (PostgreSQL, Redis, Qdrant, Neo4j), observability stack (Prometheus, Grafana, Langfuse, DCGM), the Ollama inference runtime, and a skeletal FastAPI + LangGraph backend with a single mock node.
+
+This is why the repository contains services such as **Open WebUI** and **n8n** that are not active in the Nahual.AI pipeline — they are inherited from the base lab and preserved for continuity.
+
+
+### What Was Built During the Hackathon (6 Hours)
+
+| Built on May 9 | Description |
+|---|---|
+| **5-node LangGraph pipeline** | Full agentic orchestration: discovery → routing → GraphRAG → tool execution → UI generation |
+| **Hybrid inference architecture** | Local Gemma 2b router + Gemini 2.0 Flash UI synthesis |
+| **Multi-layer data grounding** | Qdrant VectorRAG + Neo4j GraphRAG + PostgreSQL integration |
+| **MCP dynamic tool discovery** | Runtime tool enumeration and async execution |
+| **Generative UI renderer** | Pydantic-validated component AST → Next.js recursive renderer |
+| **SSE streaming protocol** | Progressive, per-node frontend updates |
+| **Nahual.AI frontend** | Chat interface with live generative component rendering |
+| **Prompt engineering & model tuning** | System prompts, JSON mode guardrails, fallback protocols |
+
+> The infrastructure was the runway. The hackathon was the flight.
+
+
+---
+
 
 ## 📜 License
 
 **MIT License** — Open to use, fork, and build upon.
 
+
 ---
+
 
 <p align="center">
   <strong>Nahual.AI</strong> · Generative UI Global Hackathon 2026<br/>
@@ -527,3 +620,6 @@ data: {"status": "completed", "total_latency_ms": 1923}
   🐺 <em>In the mythology of our ancestors, the Nahual transforms in the blink of an eye.<br/>
   In ours, so does the interface.</em>
 </p>
+
+
+---
