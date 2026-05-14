@@ -606,20 +606,37 @@ This is why the repository contains services such as **Open WebUI** and **n8n** 
 ---
 
 
-## 📜 License
+## ⚡ A Note From the Battlefield
 
-**MIT License** — Open to use, fork, and build upon.
+*May 9, 2026. Mexico City. The final minutes of the Global Generative User Interface Hackathon after 6 hours of coding*
+
+As the last commit was being pushed and the submission form was loading,
+the SSD of the machine that built Nahual.AI — the same drive that ran
+every container, compiled every component, and processed every inference
+of this project — began to fail.
+
+It did not fail before the pipeline was complete.
+It did not fail before the demo was recorded.
+It did not fail before the repository was submitted.
+
+**It waited.**
+
+Like the Nahual of Mesoamerican myth — which holds its form until its
+purpose is fulfilled — the hardware held on just long enough to see the
+work through. Then, and only then, it let go.
+
+Nahual.AI was delivered on time, in full, under conditions that had no
+right to produce a working submission.
+
+> *Some things don't break until they're done.*
 
 
 ---
 
 
-<p align="center">
-  <strong>Nahual.AI</strong> · Generative UI Global Hackathon 2026<br/>
-  <em>Built in one day. Designed for the frontier.</em><br/><br/>
-  🐺 <em>In the mythology of our ancestors, the Nahual transforms in the blink of an eye.<br/>
-  In ours, so does the interface.</em>
-</p>
+## 📜 License
+
+**MIT License** — Open to use, fork, and build upon.
 
 
 ---
