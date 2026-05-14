@@ -546,21 +546,6 @@ data: {"status": "completed", "total_latency_ms": 1923}
 ---
 
 
-## 🔗 Ecosystem & Sponsors
-
-| Organization | Contribution | Link |
-|---|---|---|
-| **Google DeepMind** | Gemini 2.0 Flash · A2UI Protocol · API Credits | [deepmind.google](https://deepmind.google) |
-| **CopilotKit** | AG-UI Protocol · React Framework | [copilotkit.ai](https://copilotkit.ai) |
-| **AI Tinkerers** | Event Host · Global Network | [mexico-city.aitinkerers.org](https://mexico-city.aitinkerers.org/p/generative-ui-global-hackathon-agentic-interfaces) |
-| **LangChain** | LangGraph Orchestration Framework | [langchain.com](https://langchain.com) |
-| **Manufact** | MCP Server · mcp-use SDK | [manufact.com](https://manufact.com) |
-| **Daytona** | Ephemeral Execution Environments | [daytona.io](https://daytona.io) |
-
-
----
-
-
 ## 🧱 Built On Prior Infrastructure
 
 Nahual.AI was constructed **on top of a pre-existing self-hosted AI lab** — [**AgentAI-Lab**](https://github.com/Daniel-Humberto/AgentAI-Lab) — a production-grade, 18-container local AI research platform developed in the months prior to the hackathon.
@@ -617,6 +602,21 @@ Nahual.AI was delivered on time, in full, under conditions that had no
 right to produce a working submission.
 
 > *Some things don't break until they're done.*
+
+
+---
+
+
+## 🔗 Ecosystem & Sponsors
+
+| Organization | Contribution | Link |
+|---|---|---|
+| **Google DeepMind** | Gemini 2.0 Flash · A2UI Protocol · API Credits | [deepmind.google](https://deepmind.google) |
+| **CopilotKit** | AG-UI Protocol · React Framework | [copilotkit.ai](https://copilotkit.ai) |
+| **AI Tinkerers** | Event Host · Global Network | [mexico-city.aitinkerers.org](https://mexico-city.aitinkerers.org/p/generative-ui-global-hackathon-agentic-interfaces) |
+| **LangChain** | LangGraph Orchestration Framework | [langchain.com](https://langchain.com) |
+| **Manufact** | MCP Server · mcp-use SDK | [manufact.com](https://manufact.com) |
+| **Daytona** | Ephemeral Execution Environments | [daytona.io](https://daytona.io) |
 
 
 ---
