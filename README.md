@@ -622,14 +622,6 @@ right to produce a working submission.
 ---
 
 
-## 📜 License
-
-**MIT License** — Open to use, fork, and build upon.
-
-
----
-
-
 ## 👥 Team
 
 | Role | Name |
@@ -640,3 +632,34 @@ right to produce a working submission.
 
 
 ---
+
+
+## 📜 License
+
+**MIT License** — Open to use, fork, and build upon.
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
