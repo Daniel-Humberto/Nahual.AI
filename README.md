@@ -431,7 +431,7 @@ NVIDIA GPU + NVIDIA Container Toolkit (optional but recommended)
 ---
 
 
-## 📊 Screenshots
+## 📊 Web Interface
 
 <p align="center">
   <img src="Imagenes/1.png" width="900" style="border-radius:12px; box-shadow:0 8px 24px rgba(37,99,235,0.18); margin-bottom:16px;">
@@ -453,7 +453,7 @@ NVIDIA GPU + NVIDIA Container Toolkit (optional but recommended)
 ---
 
 
-## 📊 DashBoards
+## 📊 DashBoards Metrics
 
 <p align="center">
   <img src="Imagenes/A.png" width="900" style="border-radius:12px; box-shadow:0 8px 24px rgba(37,99,235,0.18); margin-bottom:16px;">
