@@ -13,10 +13,8 @@
 </p>
 
 <p align="center">
-  <a href="#-quick-start"><img src="https://img.shields.io/badge/Quick%20Start-2563EB?style=for-the-badge" alt="Quick Start"/></a>
-  <a href="#%EF%B8%8F-system-architecture"><img src="https://img.shields.io/badge/Architecture-7C3AED?style=for-the-badge" alt="Architecture"/></a>
-  <a href="#-technical-stack"><img src="https://img.shields.io/badge/Stack-059669?style=for-the-badge" alt="Stack"/></a>
-  <a href="#-performance-metrics"><img src="https://img.shields.io/badge/Performance-DC2626?style=for-the-badge" alt="Performance"/></a>
+    🐺 <em>In the mythology of our ancestors, the Nahual transforms in the blink of an eye.<br/>
+  In ours, so does the interface.</em>
 </p>
 
 ---
