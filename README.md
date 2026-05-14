@@ -377,9 +377,7 @@ DCGM      → NVIDIA GPU utilization (Ollama inference load)
 
 ---
 
-## 🚀 Quick Start
-
-### Requirements
+## 🚀 Requirements
 
 ```bash
 # System
@@ -389,53 +387,6 @@ Docker Compose 2.20+
 16 GB RAM minimum
 NVIDIA GPU + NVIDIA Container Toolkit (optional but recommended)
 ```
-
-### 6 Commands to Launch
-
-```bash
-# 1. Clone
-git clone https://github.com/Daniel-Humberto/Nahual.AI
-cd Nahual.AI
-
-# 2. Configure environment
-cp .env.example .env
-
-# 3. Add your Gemini API key
-echo "GEMINI_API_KEY=your_key_here" >> .env
-
-# 4. Build all containers
-make build
-
-# 5. Start the stack
-make up
-
-# 6. Pull local models
-make update-models
-```
-
-### Verification
-
-```bash
-# Health check
-curl http://localhost:8000/health
-
-# Follow logs
-make logs
-
-# Open the UI
-open http://localhost:3000
-```
-
-### Service Map
-
-| Service | URL | Purpose |
-|---|---|---|
-| **Frontend** | localhost:3000 | Main Generative UI |
-| **API Docs** | localhost:8000/docs | Swagger / OpenAPI |
-| **Grafana** | localhost:3001 | Infrastructure observability |
-| **Langfuse** | localhost:3031 | LLM trace & observability |
-| **Neo4j Browser** | localhost:7474 | Graph DB explorer |
-| **PgAdmin** | localhost:5050 | PostgreSQL management |
 
 ---
 
@@ -468,6 +419,19 @@ open http://localhost:3000
   <img src="Imagenes/B.png" width="900" style="border-radius:12px; box-shadow:0 8px 24px rgba(37,99,235,0.18); margin-bottom:16px;">
 </p>
 
+
+---
+
+## 🌐 Service Map
+
+| Service | URL | Purpose |
+|---|---|---|
+| **Frontend** | localhost:3000 | Main Generative UI |
+| **API Docs** | localhost:8000/docs | Swagger / OpenAPI |
+| **Grafana** | localhost:3001 | Infrastructure observability |
+| **Langfuse** | localhost:3031 | LLM trace & observability |
+| **Neo4j Browser** | localhost:7474 | Graph DB explorer |
+| **PgAdmin** | localhost:5050 | PostgreSQL management |
 
 ---
 
