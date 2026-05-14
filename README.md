@@ -546,18 +546,6 @@ data: {"status": "completed", "total_latency_ms": 1923}
 ---
 
 
-## 👥 Team
-
-| Role | Name |
-|---|---|
-| **Architecture Lead** | Daniel Humberto Reyes Rocha |
-| **Frontend & UX** | Alan Manuel Medina Solis |
-| **Data Science** | José Antonio Ramírez Moguel |
-
-
----
-
-
 ## 🔗 Ecosystem & Sponsors
 
 | Organization | Contribution | Link |
@@ -637,6 +625,18 @@ right to produce a working submission.
 ## 📜 License
 
 **MIT License** — Open to use, fork, and build upon.
+
+
+---
+
+
+## 👥 Team
+
+| Role | Name |
+|---|---|
+| **Architecture Lead** | Daniel Humberto Reyes Rocha |
+| **Frontend & UX** | Alan Manuel Medina Solis |
+| **Data Science** | José Antonio Ramírez Moguel |
 
 
 ---
